@@ -271,7 +271,7 @@ function activate(context) {
         if (error) {
           showOutput(error);
           return;
-        } else if (branchSummary.all.length == 0) {
+        } else if (branchSummary.all.length === 0) {
           vscode.window.showErrorMessage(
             "No branches found. Git add files and commit maybe?"
           );
