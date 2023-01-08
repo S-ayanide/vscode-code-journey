@@ -14,12 +14,12 @@ function activate(context) {
     function () {
       if (projectRoot === undefined) {
         vscode.window.showErrorMessage(
-          "No directory open. Please open a directory first."
+          "🙇🏻 No directory open. Please open a directory first."
         );
       } else {
         simpleGit.init(function () {
           vscode.window.showInformationMessage(
-            "Initiated git repository at " + projectRoot
+            "💻 Initiated git repository at " + projectRoot
           );
         });
       }
@@ -58,7 +58,11 @@ function activate(context) {
             showOutput(err);
             return;
           }
-          showOutput(result);
+          showOutput(
+            "Started your journey for Project " +
+              moduleName +
+              "\n🔁 🔁 Rolling back to the earliest commit 🔁 🔁 \n"
+          );
         });
       });
     }
@@ -80,8 +84,6 @@ function activate(context) {
           );
           return;
         }
-
-        // showOutput(project);
 
         let nextHash;
         project.forEach((commit, i) => {
@@ -173,7 +175,7 @@ function activate(context) {
           .then(async function (commitHash) {
             if (!commitHash) {
               vscode.window.showErrorMessage(
-                "You must enter a commit hash for the project to continue"
+                "🙇🏻 You must enter a commit hash for the project to continue"
               );
               return;
             }
@@ -189,7 +191,7 @@ function activate(context) {
 
             if (isPresent !== true) {
               showOutput(
-                "The provided hash is not present in the project, please provide a valid commit hash"
+                "🙇🏻 The provided hash is not present in the project, please provide a valid commit hash"
               );
               return;
             }
