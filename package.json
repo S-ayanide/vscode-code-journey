@@ -3,11 +3,25 @@
   "displayName": "Code Journey",
   "publisher": "sayanmondal",
   "description": "An extension that takes you on a journey of the developer/organization's code of the Project from the first ever commit written to the latest based on your choices.",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "icon": "images/code_journey_logo.png",
+  "galleryBanner": {
+    "color": "#dddddd",
+    "theme": "light"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/S-ayanide/vscode-code-journey"
   },
+  "author": {
+    "name": "Sayan Mondal",
+    "email": "sayanmondal342@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/S-ayanide/vscode-code-journey/issues"
+  },
+  "homepage": "https://github.com/S-ayanide/vscode-code-journey",
+  "license": "Apache License 2",
   "engines": {
     "vscode": "^1.74.0"
   },
