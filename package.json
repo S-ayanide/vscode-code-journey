@@ -1,7 +1,7 @@
 {
   "name": "code-journey",
   "displayName": "Code Journey",
-  "publisher": "Sayan",
+  "publisher": "sayanmondal",
   "description": "An extension that takes you on a journey of the developer/organization's code of the Project from the first ever commit written to the latest based on your choices.",
   "version": "0.1.0",
   "repository": {
@@ -12,9 +12,13 @@
     "vscode": "^1.74.0"
   },
   "categories": [
-    "github",
+    "Other"
+  ],
+  "keywords": [
     "git",
-    "extension"
+    "github",
+    "gitlab",
+    "pull request"
   ],
   "activationEvents": [
     "onCommand:codeJourney.doOriginCurrentPull",
