@@ -17,6 +17,7 @@
     "onCommand:codeJourney.doReset",
     "onCommand:codeJourney.doNext",
     "onCommand:codeJourney.doBefore",
+    "onCommand:codeJourney.doJumpToCommit",
     "onCommand:codeJourney.doAddOrigin",
     "onCommand:codeJourney.doAddRemote",
     "onCommand:codeJourney.doChangeBranch",
@@ -43,6 +44,10 @@
       {
         "command": "codeJourney.doBefore",
         "title": "Code Journey: What's Before"
+      },
+      {
+        "command": "codeJourney.doJumpToCommit",
+        "title": "Code Journey: Jump to Commit"
       },
       {
         "command": "codeJourney.doOriginCurrentPull",

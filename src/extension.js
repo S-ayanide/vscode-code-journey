@@ -152,6 +152,66 @@ function activate(context) {
     }
   );
 
+  var disposableJumpToCommit = vscode.commands.registerCommand(
+    "codeJourney.doJumpToCommit",
+    async function () {
+      try {
+        // Retrieve the commit hashes from globalState to identify the hash
+        const { project } = await state.read(`${moduleName}.project`);
+
+        if (project === undefined) {
+          showOutput(
+            "This seems to be a new project, please run `Code Journey: Start Journey` first"
+          );
+          return;
+        }
+
+        vscode.window
+          .showInputBox({
+            placeHolder: "Enter Commit Hash",
+          })
+          .then(async function (commitHash) {
+            if (!commitHash) {
+              vscode.window.showErrorMessage(
+                "You must enter a commit hash for the project to continue"
+              );
+              return;
+            }
+
+            let isPresent = false;
+            project.forEach((commit) => {
+              if (commitHash === commit.hash) {
+                isPresent = true;
+              }
+            });
+
+            showOutput(project);
+
+            if (isPresent !== true) {
+              showOutput(
+                "The provided hash is not present in the project, please provide a valid commit hash"
+              );
+              return;
+            }
+
+            await state.writeCurrentHash(`${moduleName}.current`, {
+              currentHash: commitHash,
+            });
+
+            simpleGit.reset("hard", [commitHash], function (err, result) {
+              if (err) {
+                showOutput(err);
+                return;
+              }
+              showOutput(result);
+            });
+          });
+      } catch (err) {
+        vscode.window.showErrorMessage(err);
+      }
+    }
+  );
+
   var disposableLogAll = vscode.commands.registerCommand(
     "codeJourney.doLogAll",
     function () {
@@ -406,6 +466,7 @@ function activate(context) {
   context.subscriptions.push(disposableReset);
   context.subscriptions.push(disposableWhatNext);
   context.subscriptions.push(disposableWhatBefore);
+  context.subscriptions.push(disposableJumpToCommit);
   context.subscriptions.push(disposableOriginCurrentPull);
   context.subscriptions.push(disposableStatus);
   context.subscriptions.push(disposableLogAll);
