@@ -16,6 +16,7 @@
     "onCommand:codeJourney.doInit",
     "onCommand:codeJourney.doReset",
     "onCommand:codeJourney.doNext",
+    "onCommand:codeJourney.doBefore",
     "onCommand:codeJourney.doAddOrigin",
     "onCommand:codeJourney.doAddRemote",
     "onCommand:codeJourney.doChangeBranch",
@@ -37,7 +38,11 @@
       },
       {
         "command": "codeJourney.doNext",
-        "title": "Code Journey: What Next"
+        "title": "Code Journey: What's Next"
+      },
+      {
+        "command": "codeJourney.doBefore",
+        "title": "Code Journey: What's Before"
       },
       {
         "command": "codeJourney.doOriginCurrentPull",

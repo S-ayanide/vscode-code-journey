@@ -7,6 +7,8 @@ function activate(context) {
   var outputChannel = vscode.window.createOutputChannel("Code-Journey");
   const state = stateManager(context);
 
+  const moduleName = projectRoot.split("/").at(-1);
+
   var disposableInit = vscode.commands.registerCommand(
     "codeJourney.doInit",
     function () {
@@ -33,6 +35,7 @@ function activate(context) {
           showOutput(error);
           return;
         }
+
         const commitArr = [];
         result.all.reverse().forEach((commit, i) => {
           commitArr.push({
@@ -42,10 +45,10 @@ function activate(context) {
         });
 
         // Save the reverse commit hashes to global state
-        await state.write("project", {
+        await state.write(`${moduleName}.project`, {
           project: commitArr,
         });
-        await state.writeCurrentHash("current", {
+        await state.writeCurrentHash(`${moduleName}.current`, {
           currentHash: commitArr[0].hash,
         });
 
@@ -64,33 +67,88 @@ function activate(context) {
   var disposableWhatNext = vscode.commands.registerCommand(
     "codeJourney.doNext",
     async function () {
-      // Retrieve the commit hashes from DB to identify the hash
-      const { project } = await state.read("project");
-      const { currentHash } = await state.readCurrentHash("current");
+      try {
+        // Retrieve the commit hashes from globalState to identify the hash
+        const { project } = await state.read(`${moduleName}.project`);
+        const { currentHash } = await state.readCurrentHash(
+          `${moduleName}.current`
+        );
 
-      showOutput(currentHash);
-
-      let nextHash;
-      project.forEach((commit, i) => {
-        if (currentHash === commit.hash) {
-          console.log("Match");
-          if (i !== project.length - 1) {
-            nextHash = project[i + 1].hash;
-          }
-        }
-      });
-
-      simpleGit.reset("hard", [nextHash], function (err, result) {
-        if (err) {
-          showOutput(err);
+        if (project === undefined) {
+          showOutput(
+            "This seems to be a new project, please run `Code Journey: Start Journey` first"
+          );
           return;
         }
-        showOutput(result);
-      });
 
-      await state.writeCurrentHash("current", {
-        currentHash: nextHash,
-      });
+        // showOutput(project);
+
+        let nextHash;
+        project.forEach((commit, i) => {
+          console.log(commit.hash);
+
+          if (currentHash === commit.hash) {
+            if (i !== project.length - 1) {
+              nextHash = project[i + 1].hash;
+            }
+            simpleGit.reset("hard", [nextHash], async function (err, result) {
+              if (err) {
+                showOutput(err);
+                return;
+              }
+              showOutput(result);
+              await state.writeCurrentHash(`${moduleName}.current`, {
+                currentHash: nextHash,
+              });
+            });
+          }
+        });
+      } catch (err) {
+        showErrorMessage(err);
+      }
+    }
+  );
+
+  var disposableWhatBefore = vscode.commands.registerCommand(
+    "codeJourney.doBefore",
+    async function () {
+      try {
+        // Retrieve the commit hashes from globalState to identify the hash
+        const { project } = await state.read(`${moduleName}.project`);
+        const { currentHash } = await state.readCurrentHash(
+          `${moduleName}.current`
+        );
+
+        if (project === undefined) {
+          showOutput(
+            "This seems to be a new project, please run `Code Journey: Start Journey` first"
+          );
+          return;
+        }
+
+        let previousHash;
+        project.forEach((commit, i) => {
+          if (currentHash === commit.hash) {
+            if (i !== 0) {
+              previousHash = project[i - 1].hash;
+            }
+          }
+        });
+
+        simpleGit.reset("hard", [previousHash], function (err, result) {
+          if (err) {
+            showOutput(err);
+            return;
+          }
+          showOutput(result);
+        });
+
+        await state.writeCurrentHash(`${moduleName}.current`, {
+          currentHash: previousHash,
+        });
+      } catch (err) {
+        showErrorMessage(err);
+      }
     }
   );
 
@@ -347,6 +405,7 @@ function activate(context) {
   context.subscriptions.push(disposableInit);
   context.subscriptions.push(disposableReset);
   context.subscriptions.push(disposableWhatNext);
+  context.subscriptions.push(disposableWhatBefore);
   context.subscriptions.push(disposableOriginCurrentPull);
   context.subscriptions.push(disposableStatus);
   context.subscriptions.push(disposableLogAll);
