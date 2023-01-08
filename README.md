@@ -1,5 +1,6 @@
 # Code Journey
 
+[![Build](https://github.com/S-ayanide/vscode-code-journey/actions/workflows/ci.yml/badge.svg)](https://github.com/S-ayanide/vscode-code-journey/actions/workflows/ci.yml)
 [![renovate badge](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovateapp.com/)
 
 This VSCode Extension takes you on a journey of the developer/organization's code of the Project from the first ever commit written to the latest based on your choices. It helps you understand how a developer through in each step of the project.
