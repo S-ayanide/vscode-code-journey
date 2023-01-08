@@ -1,23 +1,79 @@
 {
   "name": "code-journey",
   "displayName": "Code Journey",
+  "publisher": "Sayan",
   "description": "An extension that takes you on a journey of the developer/organization's code of the Project from the first ever commit written to the latest based on your choices.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.74.0"
   },
   "categories": [
-    "Other"
+    "Github"
   ],
   "activationEvents": [
-    "onCommand:code-journey.helloWorld"
+    "onCommand:codeJourney.doOriginCurrentPull",
+    "onCommand:codeJourney.doStatus",
+    "onCommand:codeJourney.doInit",
+    "onCommand:codeJourney.doReset",
+    "onCommand:codeJourney.doNext",
+    "onCommand:codeJourney.doAddOrigin",
+    "onCommand:codeJourney.doAddRemote",
+    "onCommand:codeJourney.doChangeBranch",
+    "onCommand:codeJourney.doCreateBranch",
+    "onCommand:codeJourney.doLogAll",
+    "onCommand:codeJourney.doLogCurrentFile",
+    "onCommand:codeJourney.doCheckoutCurrentFile"
   ],
-  "main": "./dist/extension.js",
+  "main": "./src/extension",
   "contributes": {
     "commands": [
       {
-        "command": "code-journey.helloWorld",
-        "title": "Hello World"
+        "command": "codeJourney.doInit",
+        "title": "Code Journey: Init"
+      },
+      {
+        "command": "codeJourney.doReset",
+        "title": "Code Journey: Start Journey"
+      },
+      {
+        "command": "codeJourney.doNext",
+        "title": "Code Journey: What Next"
+      },
+      {
+        "command": "codeJourney.doOriginCurrentPull",
+        "title": "Code Journey: Pull Current Branch from Origin"
+      },
+      {
+        "command": "codeJourney.doStatus",
+        "title": "Code Journey: Status"
+      },
+      {
+        "command": "codeJourney.doAddOrigin",
+        "title": "Code Journey: Add Origin"
+      },
+      {
+        "command": "codeJourney.doAddRemote",
+        "title": "Code Journey: Add Remote"
+      },
+      {
+        "command": "codeJourney.doChangeBranch",
+        "title": "Code Journey: Change/Checkout Existing Branch"
+      },
+      {
+        "command": "codeJourney.doCreateBranch",
+        "title": "Code Journey: Create New Branch"
+      },
+      {
+        "command": "codeJourney.doLogAll",
+        "title": "Code Journey: Log All"
+      },
+      {
+        "command": "codeJourney.doLogCurrentFile",
+        "title": "Code Journey: Log Current File"
+      },
+      {
+        "command": "codeJourney.doCheckoutCurrentFile",
+        "title": "Code Journey: Checkout Current File"
       }
     ]
   },
@@ -26,26 +82,23 @@
     "compile": "webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
-    "compile-tests": "tsc -p . --outDir out",
-    "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "lint": "eslint src --ext ts"
   },
   "devDependencies": {
-    "@types/vscode": "^1.74.0",
     "@types/glob": "^8.0.0",
-    "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
     "eslint": "^8.28.0",
     "glob": "^8.0.3",
-    "mocha": "^10.1.0",
-    "typescript": "^4.9.3",
     "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0",
-    "@vscode/test-electron": "^2.2.0"
+    "webpack-cli": "^5.0.0"
+  },
+  "dependencies": {
+    "simple-git": "^3.15.1"
   }
 }
