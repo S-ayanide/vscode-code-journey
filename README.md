@@ -7,6 +7,8 @@ This VSCode Extension takes you on a journey of the developer/organization's cod
 
 > "Talk is cheap. Show me the code" - Linus Torvalds
 
+<br />
+
 ![](./images/code_journey_usage.gif)
 
 ## Features
@@ -35,6 +37,14 @@ Additionally, by default this extension assumes the git binary is already availa
 
 There are additional settings for this extension as well, enter `Code Journey` in the Command Palette of
 VS Code to see them all.
+
+## Code Diff
+
+Check the difference in commit histories in a .diff file
+
+<br />
+
+![](./images/code_journey_diff.gif)
 
 ## Contributors ✨
 
