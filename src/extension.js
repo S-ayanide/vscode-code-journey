@@ -80,15 +80,15 @@ function activate(context) {
         }
       });
 
-      // simpleGit.reset("hard", [nextHash], function (err, result) {
-      //   if (err) {
-      //     showOutput(err);
-      //     return;
-      //   }
-      //   showOutput(result);
-      // });
+      simpleGit.reset("hard", [nextHash], function (err, result) {
+        if (err) {
+          showOutput(err);
+          return;
+        }
+        showOutput(result);
+      });
 
-      await state.write("current", {
+      await state.writeCurrentHash("current", {
         currentHash: nextHash,
       });
     }
