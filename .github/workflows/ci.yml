@@ -21,8 +21,8 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm compile
+          npm run compile
 
       - name: Lint
         run: |
-          npm lint
+          npm run lint
