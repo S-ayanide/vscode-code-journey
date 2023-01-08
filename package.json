@@ -3,12 +3,18 @@
   "displayName": "Code Journey",
   "publisher": "Sayan",
   "description": "An extension that takes you on a journey of the developer/organization's code of the Project from the first ever commit written to the latest based on your choices.",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/S-ayanide/vscode-code-journey"
+  },
   "engines": {
     "vscode": "^1.74.0"
   },
   "categories": [
-    "Github"
+    "github",
+    "git",
+    "extension"
   ],
   "activationEvents": [
     "onCommand:codeJourney.doOriginCurrentPull",
