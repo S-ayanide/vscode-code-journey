@@ -7,6 +7,8 @@ This VSCode Extension takes you on a journey of the developer/organization's cod
 
 > "Talk is cheap. Show me the code" - Linus Torvalds
 
+![](./images/code_journey_usage.gif)
+
 ## Features
 
 Currently it is possible to do the following:
