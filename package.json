@@ -12,7 +12,6 @@
   ],
   "activationEvents": [
     "onCommand:codeJourney.doOriginCurrentPull",
-    "onCommand:codeJourney.doStatus",
     "onCommand:codeJourney.doInit",
     "onCommand:codeJourney.doReset",
     "onCommand:codeJourney.doNext",
@@ -23,8 +22,7 @@
     "onCommand:codeJourney.doChangeBranch",
     "onCommand:codeJourney.doCreateBranch",
     "onCommand:codeJourney.doLogAll",
-    "onCommand:codeJourney.doLogCurrentFile",
-    "onCommand:codeJourney.doCheckoutCurrentFile"
+    "onCommand:codeJourney.doLogCurrentFile"
   ],
   "main": "./src/extension",
   "contributes": {
@@ -54,10 +52,6 @@
         "title": "Code Journey: Pull Current Branch from Origin"
       },
       {
-        "command": "codeJourney.doStatus",
-        "title": "Code Journey: Status"
-      },
-      {
         "command": "codeJourney.doAddOrigin",
         "title": "Code Journey: Add Origin"
       },
@@ -80,10 +74,6 @@
       {
         "command": "codeJourney.doLogCurrentFile",
         "title": "Code Journey: Log Current File"
-      },
-      {
-        "command": "codeJourney.doCheckoutCurrentFile",
-        "title": "Code Journey: Checkout Current File"
       }
     ]
   },

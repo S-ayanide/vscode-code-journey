@@ -104,7 +104,7 @@ function activate(context) {
           }
         });
       } catch (err) {
-        showErrorMessage(err);
+        vscode.window.showErrorMessage(err);
       }
     }
   );
@@ -147,7 +147,7 @@ function activate(context) {
           currentHash: previousHash,
         });
       } catch (err) {
-        showErrorMessage(err);
+        vscode.window.showErrorMessage(err);
       }
     }
   );
@@ -244,7 +244,7 @@ function activate(context) {
         { file: vscode.window.activeTextEditor.document.fileName },
         function (error, result) {
           if (error) {
-            showOutput(error);
+            vscode.window.showErrorMessage(error);
             return;
           }
           var logs = fillCommits(result.all);
@@ -329,21 +329,6 @@ function activate(context) {
     }
   );
 
-  var disposableCheckoutCurrentFile = vscode.commands.registerCommand(
-    "giteasy.doCheckoutCurrentFile",
-    function () {
-      simpleGit.checkout(
-        vscode.window.activeTextEditor.document.fileName,
-        function (error, result) {
-          if (error) {
-            showOutput(error);
-            return;
-          }
-        }
-      );
-    }
-  );
-
   var disposableAddOrigin = vscode.commands.registerCommand(
     "codeJourney.doAddOrigin",
     function () {
@@ -414,68 +399,18 @@ function activate(context) {
     }
   );
 
-  var disposableStatus = vscode.commands.registerCommand(
-    "giteasy.doStatus",
-    function () {
-      var fileList = [];
-      simpleGit.status(function (error, status) {
-        console.log(status);
-        if (error) {
-          showOutput(error);
-          return;
-        }
-        fileList = fillFileList(status, fileList, false);
-
-        var qp = vscode.window.showQuickPick(fileList);
-        qp.then(function (result) {
-          if (result === null) {
-            return;
-          }
-          if (["Untracked", "New"].indexOf(result.description) >= 0) {
-            return;
-          } else {
-            simpleGit.diff([result.label], function (error, result) {
-              if (error) {
-                throw error;
-              }
-
-              var diffFile = os.tmpdir() + "/.git-easy.diff";
-
-              fs.writeFile(diffFile, result, (err) => {
-                if (err) {
-                  throw err;
-                }
-                vscode.workspace
-                  .openTextDocument(diffFile)
-                  .then(function (file) {
-                    vscode.window.showTextDocument(
-                      file,
-                      vscode.ViewColumn.Two,
-                      false
-                    );
-                  });
-              });
-            });
-          }
-        });
-      });
-    }
-  );
-
   context.subscriptions.push(disposableInit);
   context.subscriptions.push(disposableReset);
   context.subscriptions.push(disposableWhatNext);
   context.subscriptions.push(disposableWhatBefore);
   context.subscriptions.push(disposableJumpToCommit);
   context.subscriptions.push(disposableOriginCurrentPull);
-  context.subscriptions.push(disposableStatus);
   context.subscriptions.push(disposableLogAll);
   context.subscriptions.push(disposableAddOrigin);
   context.subscriptions.push(disposableAddRemote);
   context.subscriptions.push(disposableChangeBranch);
   context.subscriptions.push(disposableCreateBranch);
   context.subscriptions.push(disposableLogCurrentFile);
-  context.subscriptions.push(disposableCheckoutCurrentFile);
 
   // Utilities
 
