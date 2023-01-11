@@ -1,5 +1,5 @@
 <div align="center">
-  <a href"https://marketplace.visualstudio.com/items?itemName=sayanmondal.code-journey#:~:text=To%20execute%20the%20'Code%20Journey,at%20how%20the%20code%20progressed."><img src="images/code_journey_logo.png" alt="Code Journey" height=170></a>
+  <a href"https://marketplace.visualstudio.com/items?itemName=sayanmondal.code-journey"><img src="images/code_journey_logo.png" alt="Code Journey" height=170></a>
   <br />
   <h1>Code Journey</h1>
   <h3>This VSCode Extension takes you on a journey of the developer/organization's code of the Project from the first ever commit written to the latest based on your choices. It helps you understand how a developer through in each step of the project.</h3>
@@ -8,6 +8,7 @@
 <br />
 
 [![Build](https://github.com/S-ayanide/vscode-code-journey/actions/workflows/ci.yml/badge.svg)](https://github.com/S-ayanide/vscode-code-journey/actions/workflows/ci.yml)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/sayanmondal.code-journey)](https://marketplace.visualstudio.com/items?itemName=sayanmondal.code-journey)
 [![renovate badge](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovateapp.com/)
 
 > "Talk is cheap. Show me the code" - Linus Torvalds
@@ -15,6 +16,18 @@
 <br />
 
 ![](./images/code_journey_usage.gif)
+
+## Installation
+
+Install through VS Code extensions. Search for `Code Journey`
+
+[Visual Studio Code Market Place: Code Journey](https://marketplace.visualstudio.com/items?itemName=sayanmondal.code-journey)
+
+Can also be installed in VS Code: Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter.
+
+```
+ext install sayanmondal.code-journey
+```
 
 ## Features
 
